@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package usbplotter;
+package au.edu.jcu.usb;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -96,7 +96,7 @@ public class USBInterface {
         List<Double> returnList = new ArrayList<>();
         String readString = readAsString();
         String[] split = readString.split("\\s");
-        
+
         for (String valueAsStr : split) {
 
             if (valueAsStr.length() > 0) {

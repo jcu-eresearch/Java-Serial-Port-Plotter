@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package usbplotter;
+package au.edu.jcu.usb;
 
+import au.edu.jcu.usb.USBInterface;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -30,9 +31,9 @@ public class USBPlotFrame extends JFrame {
 
     /**
      * Construct a Frame to plot our USB Data.
-     * 
+     *
      * The Frame contains an XY plot (scatter plot), with a single XYSeries.
-     * 
+     *
      * @throws HeadlessException 
      */
     public USBPlotFrame() throws HeadlessException {
@@ -52,9 +53,9 @@ public class USBPlotFrame extends JFrame {
 
     /**
      * Add a point to the XYSeries (the scatter plot)
-     * 
+     *
      * @param x
-     * @param y 
+     * @param y
      */
     public void addPoint(Number x, Number y) {
         xySeries.add(x, y);
@@ -62,27 +63,27 @@ public class USBPlotFrame extends JFrame {
 
     /**
      * Constructs the ChartPanel from the provided XYSeriesCollection
-     * 
+     *
      * @param xySeriesCollection
      * @return The constructed ChartPanel containing the XY scatter plot
      */
     private ChartPanel constructChart(XYSeriesCollection xySeriesCollection) {
         // Construct the scatter plot from the provided xySeriesCollection
         JFreeChart chart = ChartFactory.createScatterPlot("Title", "X Axis", "Y Axis", xySeriesCollection);
-        
+
         // Get the XY Plot from the scatter chart
         XYPlot xyPlot = (XYPlot) chart.getPlot();
         xyPlot.setDomainCrosshairVisible(true);
         xyPlot.setRangeCrosshairVisible(true);
-        
+
         // Create the renderer
         XYItemRenderer renderer = xyPlot.getRenderer();
         renderer.setSeriesPaint(0, Color.blue);
-        
+
         NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
-        
+
         domain.setVerticalTickLabels(true);
-        
+
         ChartPanel chartPanel = new ChartPanel(chart);
         return chartPanel;       
     }
@@ -90,7 +91,7 @@ public class USBPlotFrame extends JFrame {
     /**
      * Creates the XY Plot, and then listens to the USB interface (/dev/ttyUSB0) and plots the
      * read data. The USB Interface is read every second.
-     * 
+     *
      * @param args
      * @throws Exception 
      */
